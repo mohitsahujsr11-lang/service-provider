@@ -4,5 +4,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             defaultValue: "pending",
         },
+        date: DataTypes.DATEONLY,
+        description: DataTypes.STRING,
     });
 };

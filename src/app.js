@@ -12,6 +12,8 @@ app.use("/upload", express.static(path.join(__dirname, "../uploads")));
 app.use("/auth", require("./routes/auth.routes"));
 app.use("/services", require("./routes/service.routes"));
 app.use("/booking", require("./routes/booking.routes"));
+app.use("/providers", require("./routes/provider.routes"));
+app.use("/addresses", require("./routes/address.routes"));
 
 db.sequelize.sync({ alter: true }).then(() => {
     app.listen(process.env.PORT, () =>

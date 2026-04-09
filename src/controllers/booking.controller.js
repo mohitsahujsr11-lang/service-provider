@@ -6,7 +6,9 @@ exports.bookService = async (req, res) => {
         const booking = await db.Booking.create({
             UserId: req.user.id,
             ProviderId: providerId,
-            status: "pending"
+            status: "pending",
+            date,
+            description
         });
         res.json(booking);
     } catch (error) {

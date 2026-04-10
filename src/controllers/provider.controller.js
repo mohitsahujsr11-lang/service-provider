@@ -3,7 +3,7 @@ const db = require("../models");
 exports.getAllProviders = async (req, res) => {
     try {
         const providers = await db.Provider.findAll({
-            include: [db.Service]
+            include: [db.Service, { model: db.User, attributes: ["name", "email", "profile_pic", "phone_no"] }]
         });
         res.json(providers);
     } catch (error) {
@@ -15,7 +15,7 @@ exports.getProviderById = async (req, res) => {
     try {
         const { id } = req.params;
         const provider = await db.Provider.findByPk(id, {
-            include: [db.Service]
+            include: [db.Service, { model: db.User, attributes: ["name", "email", "profile_pic", "phone_no"] }]
         });
         if (!provider) {
             return res.status(404).json({ error: "Provider not found" });
@@ -37,7 +37,8 @@ exports.addProvider = async (req, res) => {
         const provider = await db.Provider.create({
             name,
             price,
-            ServiceId
+            ServiceId,
+            UserId: req.user.id // Link to the authenticated vendor
         });
         
         res.status(201).json(provider);

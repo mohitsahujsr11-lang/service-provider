@@ -15,8 +15,18 @@ exports.addAddress = async (req, res) => {
     try {
         const { street, city, state, zip_code, country } = req.body;
         
-        if (!street || !city || !state || !zip_code || !country) {
-            return res.status(400).json({ error: "All address fields are required" });
+        const missingFields = [];
+        if (!street) missingFields.push("street");
+        if (!city) missingFields.push("city");
+        if (!state) missingFields.push("state");
+        if (!zip_code) missingFields.push("zip_code");
+        if (!country) missingFields.push("country");
+
+        if (missingFields.length > 0) {
+            return res.status(400).json({ 
+                error: "Missing address fields", 
+                missing: missingFields 
+            });
         }
 
         const address = await db.Address.create({

@@ -22,6 +22,10 @@ db.Booking.belongsTo(db.Provider);
 db.User.hasMany(db.Address);
 db.Address.belongsTo(db.User);
 
+// User-Provider relationship (Vendor offering one or more services)
+db.User.hasMany(db.Provider);
+db.Provider.belongsTo(db.User);
+
 // Service-Provider relationship
 db.Service.hasMany(db.Provider);
 db.Provider.belongsTo(db.Service);

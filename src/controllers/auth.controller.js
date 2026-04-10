@@ -64,7 +64,7 @@ exports.register = async (req, res) => {
         if (role === "vendor") {
             await db.Provider.create({
                 name,
-                // other provider fields can be passed if necessary
+                UserId: user.id
             });
         }
 

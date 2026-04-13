@@ -1,8 +1,11 @@
 require("dotenv").config({ path: require("path").resolve(__dirname, "../.env") });
 const express = require("express");
-const app = express();
+const cors = require("cors")
 const db = require("./models");
 
+
+const app = express();
+app.use(cors("*"))
 app.use(express.json());
 
 // Serve static files from the uploads directory
@@ -20,3 +23,8 @@ db.sequelize.sync({ alter: true }).then(() => {
         console.log("Server running on port " + process.env.PORT)
     );
 });
+
+
+
+
+
